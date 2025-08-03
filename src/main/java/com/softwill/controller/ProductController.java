@@ -26,6 +26,30 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @GetMapping("search")
+    public List<Product> searchProducts(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Double price,
+            @RequestParam(required = false) String description){
+        if(name ==null && price !=null && description ==null){
+
+            return productService.findByPriceLessThan(price);
+
+        }
+        return productService.search(name,price, description);
+    }
+
+    @GetMapping("/searchByName")
+    public List<Product> getProductByName(@RequestParam String name){
+        return productService.findByName(name);
+
+    }
+
+    @GetMapping("/searchByDescription")
+    public  List<Product> getProductByDescription(@RequestParam String keyword){
+        return productService.findByDescription(keyword);
+    }
+
 
 
 }

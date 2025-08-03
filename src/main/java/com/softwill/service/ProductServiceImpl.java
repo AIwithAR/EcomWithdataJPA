@@ -23,5 +23,31 @@ public class ProductServiceImpl  implements ProductService{
     @Override
     public List<Product> getAllProducts() {
         return productDao.findAll();
+
     }
+
+    // ------------------------------------------------------------
+
+    @Override
+    public List<Product> findByName(String name) {
+        return productDao.findByNameIgnoreCase(name);
+    }
+
+    @Override
+    public List<Product> findByPriceLessThan(double price) {
+        return productDao.findByPriceLessThan(price);
+    }
+
+    @Override
+    public List<Product> findByDescription(String keyword) {
+        return productDao.findByDescriptionContainingIgnoreCase(keyword);
+    }
+
+    @Override
+    public List<Product> search(String name, Double price, String keyword) {
+        return productDao.searchProducts(name,price,keyword);
+    }
+
+
 }
+
